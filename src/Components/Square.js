@@ -8,6 +8,8 @@ class Square extends React.Component{
 	      value: "",
 	    };
 	}
+
+	
 	render(){
 
 		const color = (this.props.value === "X")?{
@@ -22,7 +24,7 @@ class Square extends React.Component{
 			<div className = "Square" 
 			style = {color} 
 			onClick = {()=>{this.props.onHandleClick(this.props.row,this.props.col)}}>
-			<div>
+			<div className = "reactShadow">
 			{this.props.value}
 			</div>
 			</div>

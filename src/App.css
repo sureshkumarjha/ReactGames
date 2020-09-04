@@ -39,6 +39,17 @@
   flex-direction: row;
 }
 
+.ScoreCard{
+  margin: 1.4em;
+  padding: 1em;
+  box-shadow: -5px -2px 13px 1px #a5a5a5bf;;
+  border-radius: 0.40em;
+}
+
+.score{
+  padding: 0.5em;
+}
+
 .Square {
     margin: 0.2em;
     min-width: 3em;
@@ -54,6 +65,10 @@
 
 .Square:hover{
     background-color: #dcdcdcbf;
+}
+
+.reactShadow{
+  text-shadow: -2px 1px 4px #60dafb;
 }
 
 @keyframes App-logo-spin {

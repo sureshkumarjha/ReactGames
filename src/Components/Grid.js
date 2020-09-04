@@ -49,15 +49,17 @@ class Grid extends React.Component{
 
 			this.setState({
 				matrix:[["","",""],["","",""],["","",""]],
-				isNext:"X",
-				count: 0
+				isNext:this.state.isNext,
+				count: 0,
+				scoreX : (this.state.isNext === "X" )? this.state.scoreX + 1: this.state.scoreX,
+				score0 : (this.state.isNext === "0" )? this.state.score0 + 1: this.state.score0				
 			});
 
 		}
 		else{
 
 			if(this.state.count == 8){ 
-				window.alert("Tie")
+				window.alert("TIE")
 
 				this.setState({
 					matrix:[["","",""],["","",""],["","",""]],
@@ -90,16 +92,25 @@ class Grid extends React.Component{
 
 		return(
 			<div className = "Grid" >
-			<h1>Tic Tac Toe</h1>
+			<h1 className = "reactShadow">Tic Tac Toe</h1>
 			<h3>Turn : {this.state.isNext}</h3>
 			<div className = "Gridrow">
-			{grid[0]}
+				{grid[0]}
 			</div>
 			<div className = "Gridrow">
-			{grid[1]}
+				{grid[1]}
 			</div>
 			<div className = "Gridrow">
-			{grid[2]}
+				{grid[2]}
+			</div>
+
+			<div className = "Gridrow ScoreCard" >
+				<div className = "score">
+				Player with X : <b>{this.state.scoreX} </b>
+				</div>
+				<div className = "score">
+				Player with 0 : <b>{this.state.score0} </b>
+				</div>
 			</div>
 			</div>
 		);
