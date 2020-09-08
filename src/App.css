@@ -27,11 +27,22 @@
   color: #61dafb;
 }
 
+.Align-Center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*grid component*/
+
 .Grid {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation-name: Zoom-out;
+    animation-duration: 2s;
 }
 
 .Gridrow{
@@ -49,6 +60,8 @@
 .score{
   padding: 0.5em;
 }
+
+/*Square Component*/
 
 .Square {
     margin: 0.2em;
@@ -71,12 +84,38 @@
   text-shadow: -2px 1px 4px #60dafb;
 }
 
+.cardlist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  animation-name: Zoom-out;
+  animation-duration: 2s;
+}
+
+.card {
+    min-height: 10em;
+    min-width: 10em;
+    box-shadow: -2px 2px 8px 0px #438fa6;
+    border-radius: 1em;
+    margin: 0.5em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes Zoom-out{
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }
 

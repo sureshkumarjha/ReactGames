@@ -1,119 +1,34 @@
-import React,{Component} from 'react';
+import React from 'react';
 import Square from './Square';
-class Grid extends React.Component{
-	constructor(props){
-		super(props);
-		this.state = {
-			matrix : [["","",""],["","",""],["","",""]],
-			isNext:"X",
-			count : 0,
-			scoreX : 0,
-			score0 : 0
-		};
-	}
 
-	onCheck = (matrix) => {
+function Grid(props){
+	/*
+	props:
 
-		for (let i = 0; i < 3; i++) {
-			if( matrix[i][0] === matrix[i][1] && matrix[i][1] === matrix[i][2] && 
-				matrix[i][0] !== "" && matrix[i][1] !== "" && matrix[i][2] !== ""){
-				return true
-			} 
-			if( matrix[0][i] == matrix[1][i] && matrix[1][i] == matrix[2][i] && 
-				matrix[0][i] !== "" && matrix[1][i] !== "" && matrix[2][i] !== ""){
-				return true
-			} 
-		}
-		if( matrix[0][0] ===matrix[1][1] && matrix[1][1] === matrix[2][2] && 
-			matrix[0][0] !== "" && matrix[1][1] !== "" && matrix[2][2] !== ""){
-			return true
-		} 
-		if( matrix[0][2] === matrix[1][1] && matrix[1][1] === matrix[2][0] && 
-			matrix[0][2] !== "" && matrix[1][1] !== "" && matrix[2][0] !== ""){
-			return true
-		} 
+	matrix : mapping matrix to grid
+	squareStyle : Function( props value ) -> return(Object) styles for Square
+	onSquareClick : Function( props row, props col ) -> onClick event
+	
+	*/
 
-		return false
-	}
-
-	onHandleClick = (row,col) =>{
-		if(this.state.matrix[row][col] != ""){
-			return
-		}
-		let tmatrix = this.state.matrix;
-		tmatrix[row][col] = this.state.isNext
-		
-		if(this.onCheck(tmatrix)){
-
-			window.alert(`${this.state.isNext} WON `)
-
-			this.setState({
-				matrix:[["","",""],["","",""],["","",""]],
-				isNext:this.state.isNext,
-				count: 0,
-				scoreX : (this.state.isNext === "X" )? this.state.scoreX + 1: this.state.scoreX,
-				score0 : (this.state.isNext === "0" )? this.state.score0 + 1: this.state.score0				
-			});
-
-		}
-		else{
-
-			if(this.state.count == 8){ 
-				window.alert("TIE")
-
-				this.setState({
-					matrix:[["","",""],["","",""],["","",""]],
-					isNext:"X",
-					count: 0
-				});
-
-			}else{
-
-				this.setState({
-					matrix:tmatrix,
-					isNext:(this.state.isNext === "X" )? "0" : "X",
-					count: this.state.count + 1 
-				});
-			}
-		}
-	}
-
-	render(){
-
-		let grid = this.state.matrix.map((row,roxidx) => {
-			return row.map((val,colidx) => {
+	let grid = props.matrix.map((row,roxidx) => {
+		return <div className = "Gridrow">{
+		row.map((val,colidx) => {
 			return <Square 
-			value = {val} 
-			onHandleClick = {this.onHandleClick} 
-			row = {roxidx} 
-			col = {colidx}/>
-			 })
-		});
+					value = {val} 
+					onSquareClick = {props.onSquareClick} 
+					squareStyle = {props.squareStyle}
+					row = {roxidx} 
+					col = {colidx}
+					/>
+			 })}
+		</div>
+	});
 
-		return(
-			<div className = "Grid" >
-			<h1 className = "reactShadow">Tic Tac Toe</h1>
-			<h3>Turn : {this.state.isNext}</h3>
-			<div className = "Gridrow">
-				{grid[0]}
-			</div>
-			<div className = "Gridrow">
-				{grid[1]}
-			</div>
-			<div className = "Gridrow">
-				{grid[2]}
-			</div>
-
-			<div className = "Gridrow ScoreCard" >
-				<div className = "score">
-				Player with X : <b>{this.state.scoreX} </b>
-				</div>
-				<div className = "score">
-				Player with 0 : <b>{this.state.score0} </b>
-				</div>
-			</div>
-			</div>
-		);
-	}
+	return(
+		<div className = "Grid" >
+			{grid}
+		</div>
+	);
 }
 export default Grid;
